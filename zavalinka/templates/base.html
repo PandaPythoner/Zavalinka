@@ -8,8 +8,22 @@
   </head>
   <body>
     <main>
+        <div style='display:flex;flex-direction:row;float:top;width:100%;height:auto;'>
+          <div class='go-home-button' style='margin-left:0;max-width:6em'>
+            <a style='' href="{% url 'home_page' %}"> <button style='border-radius:7px;background-color: #B0B0B0;border-color:#B0B0B0'> На главную </button> </a>
+          </div>
+          {% if request.user.is_authenticated  %}
+            <div class='login-button' style='margin-right:0;margin-left:auto;max-width:3em;'>
+              <a style='' href="{% url 'logout' %}"> <button style='border-radius:7px;background-color: #FF0800;border-color:#FF0800'> Выйти </button> </a>
+            </div>
+          {% else %}
+            <div class='logout-button' style='margin-right:0;margin-left:auto;max-width:3em;'>
+              <a style='' href="{% url 'login' %}"> <button style='border-radius:7px;background-color:#04FF00;border-color:#04FF00'> Войти </button> </a>
+            </div>
+          {% endif %}
+        </div>
         {% block content %}
-          
+
         {% endblock %}
     </main>
   </body>
