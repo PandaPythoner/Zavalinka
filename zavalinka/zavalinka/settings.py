@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'zavalinka_game.apps.ZavalinkaGameConfig',
+    'sign_up.apps.SignUpConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,6 +127,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LOGIN_REDIRECT_URL = '/home/'
+LOGOUT_REDIRECT_URL = '/home/'
 
 
 STATICFILES_DIRS = [

@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', include('zavalinka_game.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('sign_up.urls')),
 ]
