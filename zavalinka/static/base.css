@@ -1,0 +1,30 @@
+
+
+.header-div{
+    display:flex;
+    flex-direction:row;
+    float:top;
+    width:100%;
+    height:auto;
+}
+
+
+.super-button{
+    border-radius:7px;
+}
+
+.go-home-button .super-button {
+    background-color: #B0B0B0;
+    border-color:#B0B0B0
+}
+
+.login-button .super-button {
+    background-color: #FF0800;
+    border-color:#FF0800
+}
+
+
+.logout-button .super-button {
+    background-color:#04FF00;
+    border-color:#04FF00
+}
