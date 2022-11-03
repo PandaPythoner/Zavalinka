@@ -15,24 +15,41 @@
   <body>
     <main>
         <div class='header-div'>
-          <div class='go-home-button' style='margin-left:0;max-width:6em'>
-            <a style='' href="{% url 'home_page' %}"> 
-              <button class="super-button"> На главную </button> 
-            </a>
-          </div>
-          {% if request.user.is_authenticated  %}
-            <div class='login-button' style='margin-right:0;margin-left:auto;max-width:3em;'>
-              <a style='' href="{% url 'logout' %}"> 
-                <button class="super-button"> Выйти </button> 
-              </a>
-            </div>
-          {% else %}
-            <div class='logout-button' style='margin-right:0;margin-left:auto;max-width:3em;'>
-              <a style='' href="{% url 'login' %}"> 
-                <button class="super-button"> Войти </button> 
-              </a>
-            </div>
-          {% endif %}
+          <table class='header-table'>
+            <tr>
+              <th class='go-home-button-th'>
+                <div class='go-home-button'>
+                  <a class='go-home-button-a' href="{% url 'home_page' %}"> 
+                    <button class="super-button"> На главную </button> 
+                  </a>
+                </div>
+              </th>
+              {% if request.user.is_authenticated  %}
+              <th class='logout-button-th'>
+                <div class='logout-button'>
+                  <add href="/signup/signup"> 
+                    <button class="super-button"> Выйти </button> 
+                  </a>
+                </div>
+              </th>
+              {% else %}
+              <th class='signup-button-th'>
+                <div class='signup-button'>
+                  <a href="{% url 'signup' %}"> 
+                    <button class="super-button">  Зарегистрироваться </button> 
+                  </a>
+                </div>
+              </th>
+              <th class='login-button-th'>
+                <div class='login-button'>
+                  <a href="{% url 'login' %}"> 
+                    <button class="super-button"> Войти </button> 
+                  </a>
+                </div>
+              </th>
+              {% endif %}
+            </tr>
+          </table>
         </div>
         {% block content %}
 
