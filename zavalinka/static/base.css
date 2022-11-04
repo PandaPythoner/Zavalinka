@@ -6,31 +6,36 @@
 
 
 .super-button {
-    border-radius: 40em;
+    border-radius: 25em;
 }
 
 
 
 
-.go-home-button .super-button {
+.go-home-button {
     background-color: #B0B0B0;
     border-color: #B0B0B0
 }
 
 
 
-.login-button .super-button {
+.login-button {
     background-color: #04FF00;
     border-color: #04FF00
 }
 
 
-.logout-button .super-button {
+.logout-button  {
     background-color: #FF0800;
     border-color: #FF0800
 }
 
-.signup-button .super-button {
+.signup-button {
     background-color: #ffe603;
     border-color: #ffe603;
+}
+
+.profile-button {
+    background-color: #7bafcc;
+    border-color: #7bafcc;
 }
