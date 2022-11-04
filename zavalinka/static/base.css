@@ -1,14 +1,12 @@
-
-
-.header-div{
-    flex-direction:row;
-    float:top;
-    width:100%;
+.header-div {
+    flex-direction: row;
+    float: top;
+    width: 100%;
 }
 
 
-.super-button{
-    border-radius:7px;
+.super-button {
+    border-radius: 40em;
 }
 
 
@@ -16,23 +14,23 @@
 
 .go-home-button .super-button {
     background-color: #B0B0B0;
-    border-color:#B0B0B0
+    border-color: #B0B0B0
 }
 
 
 
 .login-button .super-button {
     background-color: #04FF00;
-    border-color:#04FF00
+    border-color: #04FF00
 }
 
 
 .logout-button .super-button {
-    background-color:#FF0800;
-    border-color:#FF0800
+    background-color: #FF0800;
+    border-color: #FF0800
 }
 
 .signup-button .super-button {
-    background-color:#ffe603;
-    border-color:#ffe603;
+    background-color: #ffe603;
+    border-color: #ffe603;
 }

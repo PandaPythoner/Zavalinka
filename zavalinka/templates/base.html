@@ -19,42 +19,29 @@
   </head>
   <body>
     <main>
-        <div class='header-div'>
-          <table class='header-table'>
-            <tr>
-              <th class='go-home-button-th'>
-                <div class='go-home-button'>
-                  <a class='go-home-button-a' href="{% url 'home_page' %}"> 
-                    <button class="super-button"> На главную </button> 
-                  </a>
-                </div>
-              </th>
-              {% if request.user.is_authenticated  %}
-              <th class='logout-button-th'>
-                <div class='logout-button'>
-                  <add href="/signup/signup"> 
-                    <button class="super-button"> Выйти </button> 
-                  </a>
-                </div>
-              </th>
-              {% else %}
-              <th class='signup-button-th'>
-                <div class='signup-button'>
-                  <a href="{% url 'signup' %}"> 
-                    <button class="super-button">  Зарегистрироваться </button> 
-                  </a>
-                </div>
-              </th>
-              <th class='login-button-th'>
-                <div class='login-button'>
-                  <a href="{% url 'login' %}"> 
-                    <button class="super-button"> Войти </button> 
-                  </a>
-                </div>
-              </th>
-              {% endif %}
-            </tr>
-          </table>
+        <div class='container-fluid navbar'>
+          <a class='go-home-button' href="{% url 'home_page' %}"> 
+            <button class="super-button"> На главную </button> 
+          </a>
+          <ul class="nav">
+          {% if request.user.is_authenticated  %}
+          <li>
+            <a class='logout-button' href="{% url 'logout' %}"> 
+              <button class="super-button"> Выйти </button> 
+            </a>
+          </li>
+          {% else %}
+          <li>
+            <a class='signup-button' href="{% url 'signup' %}"> 
+              <button class="super-button">  Зарегистрироваться </button> 
+            </a>
+          </li>
+          <li>
+            <a class='login-button' href="{% url 'login' %}"> 
+              <button class="super-button"> Войти </button> 
+            </a>
+          </li>
+          {% endif %}
         </div>
         {% block content %}
 
