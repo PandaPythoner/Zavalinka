@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block header %}
+    <link href="{% static 'zavalinka_game/friends_list.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+
+{% block content %}
+    <div class='text-center'>
+        <h5> {{ user }}, вот ваши друзья: </h5>
+        <div class='friends-list'>
+            {% for friend in all_friends %}
+                <div class='friend-item'>
+                    <div class='friend container'>
+                        {{ friend }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

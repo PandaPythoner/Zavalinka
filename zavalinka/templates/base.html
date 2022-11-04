@@ -23,7 +23,7 @@
   </head>
   <body>
     <main>
-        <div class='container-fluid navbar'>
+        <div class='container-fluid navbar header-div'>
           <a class='' href="{% url 'home_page' %}"> 
             <button class="go-home-button super-button"> На главную </button> 
           </a>
@@ -31,10 +31,18 @@
           {% if request.user.is_authenticated  %}
           <li>
             <div class='dropdown'>
-              <button class="profile-button dropdown-toggle super-button" id='profile_dropdown_button'
+              <a href='{% url 'login' %}'>
+                <button class="btn btn-secondary profile-button" type="button">
+                  Профиль
+                </button>
+              </a>
+              <button class="btn profile-button dropdown-toggle btn-secondary dropdown-toggle-split" id='profile_dropdown_button'
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                type='button'> Профиль </button>
+                type='button'>  </button>
                 <div class='dropdown-menu' aria-labelledby='profile_dropdown_button'>
+                  <a class='dropdown-item' href="{% url 'friends_list' %}"> 
+                    <button class="friends-list-button super-button"> Друзья </button> 
+                  </a>
                   <a class='dropdown-item' href="{% url 'logout' %}"> 
                     <button class="logout-button super-button"> Выйти </button> 
                   </a>
@@ -54,9 +62,11 @@
           </li>
           {% endif %}
         </div>
-        {% block content %}
+        <div class='main-content-div'>
+          {% block content %}
 
-        {% endblock %}
+          {% endblock %}
+        <div>
     </main>
   </body>
 </html>
