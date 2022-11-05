@@ -6,7 +6,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     friends = models.ManyToManyField('Profile', blank=True)
-
+    profile_pic = models.ImageField(null=True, blank=True, default='default_icon.png')
     def __str__(self):
         return self.user.username
 

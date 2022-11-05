@@ -16,3 +16,6 @@ def friends_list(request):
     profile = request.user.profile
     context = {"all_friends": profile.friends.all()}
     return render(request, "zavalinka_game/friends_list.html", context=context)
+
+def profile(request, user):
+    return render(request, "zavalinka_game/profile.html")

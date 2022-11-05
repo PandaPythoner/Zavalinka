@@ -31,7 +31,7 @@
           {% if request.user.is_authenticated  %}
           <li>
             <div class='dropdown'>
-              <a href='{% url 'login' %}'>
+              <a href="/home/profile/{{ user }}/">
                 <button class="btn btn-secondary profile-button" type="button">
                   Профиль
                 </button>

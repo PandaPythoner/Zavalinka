@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+   <style>
+    .passe-partout {
+     padding: 30px; 
+     background: #f0f0f0; 
+     border: 2px solid #666; 
+    }
+   </style>
+  <div style="margin-left: 50px;margin-top: 50px;">
+    <img src="{% static 'images/' %}{{request.user.profile.profile_pic}}"
+    width="300" height="300" class="passe-partout">
+    <font size="50"><b>Username: </b>{{user}}</font>
+  </div>
+{% endblock %}
