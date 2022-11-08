@@ -30,6 +30,13 @@
           <ul class="nav">
           {% if request.user.is_authenticated  %}
           <li>
+            <a href="{% url 'create_game' %}">
+              <button class="btn btn-secondary create-game-button" type="button">
+                Создать игру
+              </button>
+            </a>
+          </li>
+          <li>
             <div class='dropdown'>
               <a href="/home/profile/{{ user }}/">
                 <button class="btn btn-secondary profile-button" type="button">

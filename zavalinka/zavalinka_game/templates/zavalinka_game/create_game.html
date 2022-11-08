@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block header %}
+    <link href="{% static 'zavalinka_game/create_game.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <form method='POST'>
+        {% csrf_token %}
+        <button class='btn send-button' type='submit'> Создать игру</button>
+    <form>
+{% endblock %}

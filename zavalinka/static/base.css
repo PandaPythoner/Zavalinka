@@ -8,6 +8,7 @@ body, html, main {
     float: top;
     width: 100%;
     background-color: #e9e8e8;
+    margin-bottom: 10px;
 }
 
 
@@ -55,4 +56,11 @@ body, html, main {
 .friends-list-button {
     background-color: #ffbb00;
     border-color: #ffbb00;
+}
+
+
+.create-game-button{
+    background-color: #e5ff00;
+    border-color: #e5ff00;
+    margin-right: 10px;
 }
