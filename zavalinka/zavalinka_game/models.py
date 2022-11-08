@@ -21,7 +21,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class UserInZavalinkaGame(models.Model):
-    user = models.OneToOneField('Profile', on_delete=models.CASCADE)
+    user = models.ForeignKey(to=Profile, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.user)
@@ -29,3 +29,9 @@ class UserInZavalinkaGame(models.Model):
 class ZavalinkaGame(models.Model):
     users = models.ManyToManyField('UserInZavalinkaGame', blank=True)
     round = models.IntegerField(default=0)
+
+    def __str__(self):
+        rs = f"Game number {str(self.id)}"
+        if len(self.users.all()) < 10:
+            rs += f" (Users: {' '.join(map(str, self.users.all()))})"
+        return rs

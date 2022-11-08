@@ -16,6 +16,12 @@
 
     <link href="{% static 'base.css' %}" rel="stylesheet" type="text/css">
 
+    <script>
+      {% if default_shown_message %} 
+        alert("{{ default_shown_message }}");
+      {% endif %}
+    </script>
+
 
     {% block header %}
       
@@ -28,6 +34,11 @@
             <button class="go-home-button super-button"> На главную </button> 
           </a>
           <ul class="nav">
+          <li>
+            <a href="{% url 'all_games' %}"> 
+              <button class='btn view-all-games-button'> Все игры </button> 
+            </a>
+          </li>
           {% if request.user.is_authenticated  %}
           <li>
             <a href="{% url 'create_game' %}">
@@ -59,7 +70,7 @@
           {% else %}
           <li>
             <a href="{% url 'signup' %}"> 
-              <button class='signup-button super-button'>  Зарегистрироваться </button> 
+              <button class='signup-button super-button'> Зарегистрироваться </button> 
             </a>
           </li>
           <li>

@@ -64,3 +64,9 @@ body, html, main {
     border-color: #e5ff00;
     margin-right: 10px;
 }
+
+.view-all-games-button{
+    background-color: blueviolet;
+    border-color: blueviolet;
+    margin-right: 10px;
+}

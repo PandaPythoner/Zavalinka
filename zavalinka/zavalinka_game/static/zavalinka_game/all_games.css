@@ -1,0 +1,19 @@
+.game-containter{
+    margin-left:auto;
+    margin-right:auto;
+    width: max-content;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    background-color: darkgoldenrod;
+    border-radius: 10px;
+}
+
+.game-container-inner{
+    margin: 10px;
+}
+
+.join-game-button{
+    border-radius: 7px;
+    background-color: rgb(15, 235, 15);
+    margin-left: 5px;
+}

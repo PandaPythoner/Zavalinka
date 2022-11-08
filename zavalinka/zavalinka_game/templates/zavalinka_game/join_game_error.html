@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block header %}
+    <link href="{% static 'zavalinka_game/join_game_error.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <div class='error-shown-div'>
+        Такой игры не существует или она завершена
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block header %}
+    <link href="{% static 'zavalinka_game/all_games.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+    {% for game, addit in games %}
+        <div class="game-containter">
+            <div class="game-container-inner">
+                <table>
+                    <tr>
+                        <th>
+                            <big> Игра номер {{ game.id }}</big> <br>
+                            Игроки: {{ addit.users_str }}
+                        </th>
+                        <th>
+                            <form method='POST' action="{% url 'join_game' %}">
+                                {% csrf_token %}
+                                <input type='hidden' name='game_id' value='{{ game.id }}'>
+                                <button class='join-game-button' type='submit'> Войти в игру </button>
+                            </form>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
