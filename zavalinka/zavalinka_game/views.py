@@ -30,11 +30,8 @@ class CreateGamgeView(TemplateView):
 
     def post(self, request):
         game = ZavalinkaGame()
-        user_in_game = UserInZavalinkaGame(user=request.user.profile)
         game.save()
-        user_in_game.save()
-        game.users.add(user_in_game)
-        game.save()
+        user_in_game = UserInZavalinkaGame(user=request.user.profile, game=game)
         user_in_game.save()
         return HttpResponseRedirect(reverse('game') + '?game_id=' + str(game.id))
 
@@ -61,12 +58,10 @@ class JoinGameView(TemplateView):
         if games.count() != 1:
             return render(request, 'zavalinka_game/join_game_error.html')
         user = request.user
-        user_in_game = UserInZavalinkaGame(user=user.profile)
-        user_in_game.save()
         game = games[0]
         if not game.users.filter(user=user.profile).exists():
-            game.users.add(user_in_game)
-            game.save()
+            user_in_game = UserInZavalinkaGame(user=user.profile, game=game)
+            user_in_game.save()
         return HttpResponseRedirect(reverse('game') + '?game_id=' + str(game.id))
 
 

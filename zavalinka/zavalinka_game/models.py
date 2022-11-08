@@ -22,12 +22,12 @@ def save_user_profile(sender, instance, **kwargs):
 
 class UserInZavalinkaGame(models.Model):
     user = models.ForeignKey(to=Profile, on_delete=models.CASCADE)
+    game = models.ForeignKey('ZavalinkaGame', on_delete=models.CASCADE, related_name='users')
 
     def __str__(self):
         return str(self.user)
 
 class ZavalinkaGame(models.Model):
-    users = models.ManyToManyField('UserInZavalinkaGame', blank=True)
     round = models.IntegerField(default=0)
 
     def __str__(self):
