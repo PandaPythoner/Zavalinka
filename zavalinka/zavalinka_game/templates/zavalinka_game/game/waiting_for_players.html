@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block header %}
+    <link href="{% static 'zavalinka_game/game/waiting_for_players.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+    {% for user_in_game in UserInZavalinkaGame.objects.all(): %}
+        <label>{{ user_in_game.user }}</label>
+{% endblock %}

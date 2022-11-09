@@ -22,15 +22,15 @@ def friends_list(request):
 def profile(request, user):
     return render(request, "zavalinka_game/profile.html")
 
-class CreateGamgeView(TemplateView):
+class CreateGameView(TemplateView):
     def get(self, request):
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse('login'))
         return render(request, 'zavalinka_game/create_game.html')
 
     def post(self, request):
-        game = ZavalinkaGame()
-        game.save()
+        game = ZavalinkaGame.objects.create(rounds=request.POST.get("number_of_rounds"),
+                                            name=request.POST.get("name"))
         user_in_game = UserInZavalinkaGame(user=request.user.profile, game=game)
         user_in_game.save()
         return HttpResponseRedirect(reverse('game') + '?game_id=' + str(game.id))
@@ -48,6 +48,8 @@ class GameView(TemplateView):
         user = request.user
         game = games[0]
         game_phase = str(game.phase)
+        if game_phase == 'waiting_for_players':
+            return render(request, 'zavalinka_game/game/waiting_for_players.html', context=context)
         if game_phase == 'writing_definitions':
             return render(request, 'zavalinka_game/game/writing_definitions.html')
         return render(request, 'zavalinka_game/game/game.html')
@@ -67,6 +69,8 @@ class GameView(TemplateView):
         context = {
             'game': game,
         }
+        if game_phase == 'waiting_for_players':
+            return render(request, 'zavalinka_game/game/waiting_for_players.html', context=context)
         if game_phase == 'writing_definitions':
             return render(request, 'zavalinka_game/game/writing_definitions.html', context=context)
         return render(request, 'zavalinka_game/game/game.html', context=context)

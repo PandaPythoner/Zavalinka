@@ -37,10 +37,13 @@ class UserInZavalinkaGame(models.Model):
         return str(self.user)
 
 class ZavalinkaGame(models.Model):
+    name = models.CharField(max_length=200, default="Игра бебра")
     round = models.IntegerField(default=0)
-    PHASES = ['writing_definitions', 'choosing_definition']
+    rounds = models.IntegerField(default=0)
+    status = models.BooleanField(default=True)
+    PHASES = ['waiting_for_players', 'writing_definitions', 'choosing_definition']
     phase = models.CharField(max_length=100, default=PHASES[0])
-    last_ask = models.ForeignKey('ZavalinkaWord', default=4, on_delete=models.PROTECT)
+    last_ask = models.ForeignKey('ZavalinkaWord', default=1, on_delete=models.PROTECT)
 
     def get_new_phase_and_round(self):
         phase = str(self.phase)
@@ -50,7 +53,7 @@ class ZavalinkaGame(models.Model):
             if PHASES[i] == phase:
                 if i + 1 < len(PHASES):
                     return (PHASES[i + 1], round)
-                return (PHASES[0], round + 1)
+                return (PHASES[1], round + 1)
 
 
     def __str__(self):
