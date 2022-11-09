@@ -57,11 +57,11 @@
               <button class="btn profile-button dropdown-toggle btn-secondary dropdown-toggle-split" id='profile_dropdown_button'
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 type='button'>  </button>
-                <div class='dropdown-menu' aria-labelledby='profile_dropdown_button'>
-                  <a class='dropdown-item' href="{% url 'friends_list' %}"> 
+                <div class='dropdown-menu profile-dropdown-menu' aria-labelledby='profile_dropdown_button'>
+                  <a class='dropdown-item profile-dropdown-button' href="{% url 'friends_list' %}"> 
                     <button class="friends-list-button super-button"> Друзья </button> 
                   </a>
-                  <a class='dropdown-item' href="{% url 'logout' %}"> 
+                  <a class='dropdown-item profile-dropdown-button' href="{% url 'logout' %}"> 
                     <button class="logout-button super-button"> Выйти </button> 
                   </a>
                 </div>

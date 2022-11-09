@@ -20,6 +20,14 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
+class ZavalinkaWord(models.Model):
+    word = models.CharField(max_length=200)
+    definition = models.CharField(max_length=2000)
+
+    def __str__(self):
+        return f"{self.word}: {self.definition}"
+
+
 class UserInZavalinkaGame(models.Model):
     user = models.ForeignKey(to=Profile, on_delete=models.CASCADE)
     game = models.ForeignKey('ZavalinkaGame', on_delete=models.CASCADE, related_name='users')
@@ -29,6 +37,7 @@ class UserInZavalinkaGame(models.Model):
 
 class ZavalinkaGame(models.Model):
     round = models.IntegerField(default=0)
+    
 
     def __str__(self):
         rs = f"Game number {str(self.id)}"

@@ -70,3 +70,12 @@ body, html, main {
     border-color: blueviolet;
     margin-right: 10px;
 }
+
+.profile-dropdown-menu{
+    width:min-content;
+}
+
+.profile-dropdown-button{
+    margin-right: 0px;
+    width: fit-content;
+}
