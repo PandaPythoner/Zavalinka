@@ -36,10 +36,40 @@ class CreateGamgeView(TemplateView):
         return HttpResponseRedirect(reverse('game') + '?game_id=' + str(game.id))
 
 class GameView(TemplateView):
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('login'))
+        if 'game_id' not in request.POST:
+            return render(request, 'zavalinka_game/join_game_error.html')
+        game_id = request.GET['game_id']
+        games = ZavalinkaGame.objects.filter(id=game_id)
+        if games.count() != 1:
+            return render(request, 'zavalinka_game/join_game_error.html')
+        user = request.user
+        game = games[0]
+        game_phase = str(game.phase)
+        if game_phase == 'writing_definitions':
+            return render(request, 'zavalinka_game/game/writing_definitions.html')
+        return render(request, 'zavalinka_game/game/game.html')
+
     def get(self, request):
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse('login'))
-        return render(request, 'zavalinka_game/game.html')
+        if 'game_id' not in request.GET:
+            return render(request, 'zavalinka_game/join_game_error.html')
+        game_id = request.GET['game_id']
+        games = ZavalinkaGame.objects.filter(id=game_id)
+        if games.count() != 1:
+            return render(request, 'zavalinka_game/join_game_error.html')
+        user = request.user
+        game = games[0]
+        game_phase = str(game.phase)
+        context = {
+            'game': game,
+        }
+        if game_phase == 'writing_definitions':
+            return render(request, 'zavalinka_game/game/writing_definitions.html', context=context)
+        return render(request, 'zavalinka_game/game/game.html', context=context)
 
 
 class AllGamesView(TemplateView):
@@ -53,6 +83,8 @@ class JoinGameView(TemplateView):
     def post(self, request):
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse('login'))
+        if 'game_id' not in request.POST:
+            return render(request, 'zavalinka_game/join_game_error.html')
         game_id = request.POST['game_id']
         games = ZavalinkaGame.objects.filter(id=game_id)
         if games.count() != 1:

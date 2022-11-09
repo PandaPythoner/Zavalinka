@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block header %}
+    <link href="{% static 'zavalinka_game/game/game.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <div>
+        <div class='information'>
+            <big> 
+                Придумейте интересное определение для "{{ game.last_ask.word }}":
+            </big>
+        </div>
+        <form method='POST'>
+
+        </form>
+    </div>
+{% endblock %}
