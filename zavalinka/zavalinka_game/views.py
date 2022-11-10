@@ -3,7 +3,8 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView
-from .models import UserInZavalinkaGame, ZavalinkaGame
+from .models import UserInZavalinkaGame, ZavalinkaGame, Profile
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -20,7 +21,11 @@ def friends_list(request):
     return render(request, "zavalinka_game/friends_list.html", context=context)
 
 def profile(request, user):
-    return render(request, "zavalinka_game/profile.html")
+    profile_img = User.objects.get(username=user).profile.profile_pic
+    context = {
+        "profile_img":profile_img,
+    }
+    return render(request, "zavalinka_game/profile.html", context=context)
 
 class CreateGameView(TemplateView):
     def get(self, request):
@@ -49,7 +54,7 @@ class GameView(TemplateView):
         game = games[0]
         game_phase = str(game.phase)
         if game_phase == 'waiting_for_players':
-            return render(request, 'zavalinka_game/game/waiting_for_players.html', context=context)
+            return render(request, 'zavalinka_game/game/waiting_for_players.html')
         if game_phase == 'writing_definitions':
             return render(request, 'zavalinka_game/game/writing_definitions.html')
         return render(request, 'zavalinka_game/game/game.html')
@@ -66,8 +71,10 @@ class GameView(TemplateView):
         user = request.user
         game = games[0]
         game_phase = str(game.phase)
+        users_in_game = UserInZavalinkaGame.objects.filter(game=game)
         context = {
             'game': game,
+            'users_in_game':users_in_game,
         }
         if game_phase == 'waiting_for_players':
             return render(request, 'zavalinka_game/game/waiting_for_players.html', context=context)
