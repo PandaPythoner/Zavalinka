@@ -32,8 +32,18 @@ class ProfilePage(TemplateView):
             "user":user,
         }
         return render(request, "zavalinka_game/profile.html", context=context)
-    def post(self, request):
-        request.user.profile_img = request.POST.get("profimg")
+    def post(self, request, user):
+        
+        profile_img = User.objects.get(username=user).profile.profile_pic
+        users_profile = request.user.is_authenticated
+        if users_profile:
+            users_profile = users_profile & (user == request.user.username)
+        context = {
+            "profile_img":profile_img,
+            "users_profile":users_profile,
+            "user":user,
+        }
+        return render(request, "zavalinka_game/profile.html", context=context)
 
 class CreateGameView(TemplateView):
     def get(self, request):

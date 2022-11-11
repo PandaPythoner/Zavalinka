@@ -14,9 +14,11 @@
         <img src="{% static 'images/' %}{{profile_img}}" class="profile-img">
         
         {% if users_profile %}
-          <form method="POST">
-            <input type="file" name="profimg" id="profimg">
-            
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="profimg" id="profimg" class="upload-btn">
+            <br>
+            <button type="submit" class="change-img-btn">Изменить аватар</button>
           </form>
         {% endif %}
       </div>

@@ -21,4 +21,8 @@
         {% endfor %}
         </tr>
     </table>    
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="start-btn">Начать игру</button>
+    </form>
 {% endblock %}

@@ -38,10 +38,10 @@ class UserInZavalinkaGame(models.Model):
 
 class ZavalinkaGame(models.Model):
     name = models.CharField(max_length=200, default="Игра бебра")
-    round = models.IntegerField(default=0)
+    round = models.IntegerField(default=1)
     rounds = models.IntegerField(default=0)
     status = models.BooleanField(default=True)
-    PHASES = ['waiting_for_players', 'writing_definitions', 'choosing_definition']
+    PHASES = ['waiting_for_players', 'writing_definitions', 'choosing_definition', 'endscreen']
     phase = models.CharField(max_length=100, default=PHASES[0])
     last_ask = models.ForeignKey('ZavalinkaWord', default=1, on_delete=models.PROTECT)
 
@@ -49,12 +49,27 @@ class ZavalinkaGame(models.Model):
         phase = str(self.phase)
         round = int(self.round)
         PHASES = self.PHASES
-        for i in range(len(PHASES)):
+        for i in range(1, len(PHASES) - 1):
             if PHASES[i] == phase:
-                if i + 1 < len(PHASES):
+                if i + 1 < len(PHASES) - 1:
+                    return (PHASES[i + 1], round)
+                if round == rounds:
                     return (PHASES[i + 1], round)
                 return (PHASES[1], round + 1)
-
+    
+    def next_phase(self):
+        phase = str(self.phase)
+        round = int(self.round)
+        PHASES = self.PHASES
+        for i in range(1, len(PHASES) - 1):
+            if PHASES[i] == phase:
+                if i + 1 < len(PHASES) - 1:
+                    self.phase = PHASES[i + 1]
+                elif round == rounds:
+                    self.phase = PHASES[i + 1]
+                else:
+                    self.phase = PHASES[1]
+                    self.round += 1
 
     def __str__(self):
         rs = f"Game number {str(self.id)}"

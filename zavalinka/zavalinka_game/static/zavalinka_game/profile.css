@@ -1,10 +1,10 @@
 
-.profile-img {
+.profile-img{
     /*
     background: #f0f0f0;
     border: 2px solid #666;
     */
-    max-width: 7em;
+    max-width: 15em;
     height: auto;
     width: auto;
 }
@@ -20,4 +20,10 @@
 
 .userinfo{
     width:max-content;
+    float:right;
+}
+
+.change-img-btn {
+    margin-top: 2px;
+    background-color: lightgray;
 }
