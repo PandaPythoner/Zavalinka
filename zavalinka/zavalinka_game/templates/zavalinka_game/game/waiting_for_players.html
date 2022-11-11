@@ -7,16 +7,18 @@
 {% endblock %}
 
 {% block content %}
-    <ul class="users-list">
+    <table class="users-list">
+        <tr>
         {% for user_in_game in users_in_game %}
-                <li>
+                <td>
                     <div class="col-xl user">
                         <img src="{% static 'images/' %}{{ user_in_game.user.profile_pic }}" class="profile-img">
                         <div class="user-info">
                             <font size="5.5"> <b>{{ user_in_game.user.user }}</b> </font>
                         </div>
                     </div>
-                </li>
+                </td>
         {% endfor %}
-    </ul>    
+        </tr>
+    </table>    
 {% endblock %}

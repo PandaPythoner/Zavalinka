@@ -12,6 +12,13 @@
     <div class='row'>
       <div class="col-xs">
         <img src="{% static 'images/' %}{{profile_img}}" class="profile-img">
+        
+        {% if users_profile %}
+          <form method="POST">
+            <input type="file" name="profimg" id="profimg">
+            
+          </form>
+        {% endif %}
       </div>
       <div class="col-xl userinfo">
         <font size="5.5"> <b>Username: </b>{{user}} </font>
