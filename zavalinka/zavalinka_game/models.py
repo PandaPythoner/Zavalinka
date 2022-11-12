@@ -32,6 +32,8 @@ class UserInZavalinkaGame(models.Model):
     user = models.ForeignKey(to=Profile, on_delete=models.CASCADE)
     game = models.ForeignKey('ZavalinkaGame', on_delete=models.CASCADE, related_name='users')
     last_answer = models.CharField(max_length=2000, default='')
+    score = models.IntegerField(default=0)
+    not_answered = models.BooleanField(default=1)
 
     def __str__(self):
         return str(self.user)
@@ -48,8 +50,9 @@ class ZavalinkaGame(models.Model):
     def get_new_phase_and_round(self):
         phase = str(self.phase)
         round = int(self.round)
+        rounds = int(self.rounds)
         PHASES = self.PHASES
-        for i in range(1, len(PHASES) - 1):
+        for i in range(0, len(PHASES) - 1):
             if PHASES[i] == phase:
                 if i + 1 < len(PHASES) - 1:
                     return (PHASES[i + 1], round)
@@ -61,7 +64,7 @@ class ZavalinkaGame(models.Model):
         phase = str(self.phase)
         round = int(self.round)
         PHASES = self.PHASES
-        for i in range(1, len(PHASES) - 1):
+        for i in range(0, len(PHASES) - 1):
             if PHASES[i] == phase:
                 if i + 1 < len(PHASES) - 1:
                     self.phase = PHASES[i + 1]
@@ -70,6 +73,8 @@ class ZavalinkaGame(models.Model):
                 else:
                     self.phase = PHASES[1]
                     self.round += 1
+                self.save()
+                break
 
     def __str__(self):
         rs = f"Game number {str(self.id)}"

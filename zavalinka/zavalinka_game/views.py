@@ -64,18 +64,15 @@ class GameView(TemplateView):
             return HttpResponseRedirect(reverse('login'))
         if 'game_id' not in request.POST:
             return render(request, 'zavalinka_game/join_game_error.html')
-        game_id = request.GET['game_id']
+        game_id = request.POST['game_id']
         games = ZavalinkaGame.objects.filter(id=game_id)
         if games.count() != 1:
             return render(request, 'zavalinka_game/join_game_error.html')
         user = request.user
+        games[0].next_phase()
         game = games[0]
-        game_phase = str(game.phase)
-        if game_phase == 'waiting_for_players':
-            return render(request, 'zavalinka_game/game/waiting_for_players.html')
-        if game_phase == 'writing_definitions':
-            return render(request, 'zavalinka_game/game/writing_definitions.html')
-        return render(request, 'zavalinka_game/game/game.html')
+        return HttpResponseRedirect(reverse('game') + '?game_id=' + str(game.id))
+        
 
     def get(self, request):
         if not request.user.is_authenticated:
@@ -93,12 +90,16 @@ class GameView(TemplateView):
         context = {
             'game': game,
             'users_in_game':users_in_game,
+            'users_answer':UserInZavalinkaGame.objects.get(user=user.profile, game=game).not_answered,
         }
         if game_phase == 'waiting_for_players':
             return render(request, 'zavalinka_game/game/waiting_for_players.html', context=context)
         if game_phase == 'writing_definitions':
             return render(request, 'zavalinka_game/game/writing_definitions.html', context=context)
-        return render(request, 'zavalinka_game/game/game.html', context=context)
+        if game_phase == 'choosing_definition':
+            return render(request, 'zavalinka_game/game/choosing_definition.html', context=context)
+        if game_phase == 'endscreen':
+            return render(request, 'zavalinka_game/game/endscreen.html', context=context)
 
 
 class AllGamesView(TemplateView):
