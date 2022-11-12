@@ -1,10 +1,54 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+    <link href="{% static 'signup/signup.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
 
 {% block content %}
-<h4>зарегайся ес хошь</h4>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Стать рабом мейби бейби</button>
-</form>
+<div class='signup-form'>
+    <div class='registration-header'>
+        <h4>зарегайся ес хошь</h4>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>
+                    <div class='signup-form-row'>
+                        {{ form.username.label_tag}}
+                        {{ form.username }}
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <div class='signup-form-row'>
+                        {{ form.password1.label_tag }}
+                        {{ form.password1 }}
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <div class='signup-form-row'>
+                        {{ form.password2.label_tag }}
+                        {{ form.password2 }}
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <div class='signup-form-row signup-form-submit-button-div'>
+                        <button class='signup-form-submit-button' 
+                            type="submit"> Стать рабом мейби бейби </button>
+                    <div>
+                </th>
+            </tr>
+        </table>
+    </form>
+</div>
+<div class='form-errors-div'>
+    {{ form.errors }}
+</div>
 {% endblock %}

@@ -1,0 +1,31 @@
+.signup-form-row{
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+.signup-form{
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.signup-form-submit-button-div{
+    text-align: center;
+}
+
+.registration-header{
+    text-align: center;
+}
+
+.form-errors-div{
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    color: red;
+}
+
+.signup-form-submit-button{
+    border-radius: 10px;
+    background-color: rgb(12, 95, 19);
+    border-color: rgb(30, 66, 1);
+}
