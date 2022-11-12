@@ -29,6 +29,7 @@
   </head>
   <body>
     <main>
+      <div class='main-content-div'>
         <div class='container-fluid navbar header-div'>
           <a class='' href="{% url 'home_page' %}"> 
             <button class="go-home-button super-button"> На главную </button> 
@@ -80,7 +81,6 @@
           </li>
           {% endif %}
         </div>
-        <div class='main-content-div'>
           {% block content %}
 
           {% endblock %}

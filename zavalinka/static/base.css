@@ -4,12 +4,6 @@ body, html, main {
 }
 
 
-.header-div {
-    float: top;
-    width: 100%;
-    background-color: #e9e8e8;
-    margin-bottom: 10px;
-}
 
 
 .super-button {
@@ -20,62 +14,78 @@ body, html, main {
 
 
 .go-home-button {
-    background-color: #B0B0B0;
-    border-color: #B0B0B0
+    background-color: #888787;
+    border-color: #888787
 }
 
 
 
 .login-button {
-    background-color: #04FF00;
-    border-color: #04FF00
+    background-color: #04af01;
+    border-color: #04af01
 }
 
 
 .logout-button {
-    background-color: #FF0800;
-    border-color: #FF0800
+    background-color: #c40b04;
+    border-color: #c40b04cd
 }
 
 .signup-button {
-    background-color: #ffe603;
-    border-color: #ffe603;
+    background-color: #a39301;
+    border-color: #a39301;
 }
 
 .profile-button {
-    background-color: #7bafcc;
-    border-color: #7bafcc;
+    background-color: #547a8f;
+    border-color: #547a8f;
 }
+
+
+.header-div {
+    float: top;
+    width: 100%;
+    background-color: #303030;
+    margin-bottom: 10px;
+}
+
 
 
 .main-content-div{
     height: 100%;
+    background-color: #36383a;
+}
+
+button, big, input, th, table, div{
+    color: white;
 }
 
 
 .friends-list-button {
-    background-color: #ffbb00;
-    border-color: #ffbb00;
+    background-color: #d69e04;
+    border-color: #d69e04;
 }
 
 
 .create-game-button{
-    background-color: #e5ff00;
-    border-color: #e5ff00;
+    background-color: #9aac00;
+    border-color: #9aac00;
     margin-right: 10px;
 }
 
 .view-all-games-button{
-    background-color: blueviolet;
-    border-color: blueviolet;
+    background-color: rgb(97, 32, 158);
+    border-color: rgb(97, 32, 158);
     margin-right: 10px;
 }
 
 .profile-dropdown-menu{
     width:min-content;
+    background-color:rgb(92, 92, 92)
 }
 
 .profile-dropdown-button{
     margin-right: 0px;
     width: fit-content;
 }
+
