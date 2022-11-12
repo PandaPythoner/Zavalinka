@@ -23,6 +23,7 @@
     </table>    
     <form method="POST">
         {% csrf_token %}
+        <input type="hidden" name="game_id" value="{{ game.id }}">
         <button type="submit" class="start-btn">Начать игру</button>
     </form>
 {% endblock %}

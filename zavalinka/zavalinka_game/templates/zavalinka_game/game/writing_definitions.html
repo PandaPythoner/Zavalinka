@@ -3,10 +3,11 @@
 
 
 {% block header %}
-    <link href="{% static 'zavalinka_game/game/game.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'zavalinka_game/game/writing_definition.css' %}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block content %}
+    {% if users_answer %}
     <div>
         <div class='information'>
             <big> 
@@ -14,7 +15,19 @@
             </big>
         </div>
         <form method='POST'>
-            
+            {% csrf_token %}
+            <input type="hidden" name="game_id" value="{{ game.id }}">
+            <input type="text" name="definition" id="definition" value="Ваше правдоподобное определение" class="ans-form">
+            <button type="submit" class="submit-ans-btn">Сдать определение</button>
         </form>
     </div>
+    {% else %} 
+    <div>
+        <div class='information'>
+            <big> 
+                Вы придумали определение, дождитесь ответов других игроков
+            </big>
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}
