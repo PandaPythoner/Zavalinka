@@ -60,6 +60,10 @@ button, big, input, th, table, div{
     color: white;
 }
 
+input {
+    background-color: #5f5f5f;
+}
+
 
 .friends-list-button {
     background-color: #d69e04;
