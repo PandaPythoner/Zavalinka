@@ -2,3 +2,21 @@
     background-color: greenyellow;
     border-color: greenyellow;
 }
+
+.create-game-form{
+    /*text-align: center;*/
+    width: fit-content;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.field{
+    margin-bottom: 2px;
+}
+
+.send-button-div{
+    text-align: center;
+}

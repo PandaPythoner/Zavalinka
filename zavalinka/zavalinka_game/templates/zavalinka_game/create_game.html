@@ -7,14 +7,22 @@
 {% endblock %}
 
 {% block content %}
-    <form method='POST'>
-        {% csrf_token %}
-        <label class='rounds'>Количество раундов</label>
-        <input type="number" min="1" max = "10" value="1" name="number_of_rounds" id="number_of_rounds"> 
-        <br>
-        <label class='name'>Название игры</label>
-        <input type="text" value="Название игры" name="name" id="name"> 
-        <br>
-        <button class='btn send-button' type='submit'> Создать игру</button>
-    <form>
+    <div class='create-game-form'>
+        <form method='POST'>
+            {% csrf_token %}
+            <div class='field'>
+            <label class='rounds'>Количество раундов</label>
+            <input type="number" min="1" max = "10" value="1" name="number_of_rounds" id="number_of_rounds"> 
+            </div>
+            <br>
+            <div class='field'>
+            <label class='name'>Название игры</label>
+            <input type="text" value="Название игры" name="name" id="name"> 
+            </div>
+            <br>
+            <div class='send-button-div'>
+                <button class='btn send-button' type='submit'> Создать игру</button>
+            </div>
+        <form>
+    </div>
 {% endblock %}
