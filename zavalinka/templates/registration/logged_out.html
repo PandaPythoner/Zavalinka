@@ -1,6 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+  <link href="{% static 'registration/logged_out.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
 
 
 {% block content %}
-  <h3> Ура! Теперь вы анонимус! </h3>
+  <div class='logged-out-message'>
+    <h3> Ура! Теперь вы анонимус! </h3>
+  </div>
 {% endblock %}

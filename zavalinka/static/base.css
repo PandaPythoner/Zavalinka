@@ -22,7 +22,7 @@ body, html, main {
 
 .login-button {
     background-color: #04af01;
-    border-color: #04af01
+    border-color: #04af01;
 }
 
 
@@ -92,4 +92,6 @@ input {
     margin-right: 0px;
     width: fit-content;
 }
+
+
 

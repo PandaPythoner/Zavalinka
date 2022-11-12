@@ -70,14 +70,18 @@
           </li>
           {% else %}
           <li>
-            <a href="{% url 'signup' %}"> 
-              <button class='signup-button super-button'> Зарегистрироваться </button> 
-            </a>
+            <div>
+              <a href="{% url 'signup' %}"> 
+                <button class='signup-button super-button'> Зарегистрироваться </button> 
+              </a>
+            </div>
           </li>
           <li>
-            <a class='' href="{% url 'login' %}"> 
-              <button class='login-button super-button' > Войти </button> 
-            </a>
+            <div>
+              <a class='' href="{% url 'login' %}"> 
+                <button class='login-button super-button' > Войти </button> 
+              </a>
+            </div>
           </li>
           {% endif %}
         </div>
