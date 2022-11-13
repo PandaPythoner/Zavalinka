@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView
 from .models import UserInZavalinkaGame, ZavalinkaGame, Profile
 from django.contrib.auth.models import User
+from random import shuffle
 
 # Create your views here.
 
@@ -69,8 +70,30 @@ class GameView(TemplateView):
         if games.count() != 1:
             return render(request, 'zavalinka_game/join_game_error.html')
         user = request.user
-        games[0].next_phase()
         game = games[0]
+        game_phase = game.phase
+        users_in_game = UserInZavalinkaGame.objects.filter(game=game)
+        if game_phase == 'waiting_for_players':
+            game.next_phase()
+        if game_phase == 'writing_definitions':
+            UserInZavalinkaGame.objects.get(user=user.profile, game=game).user_answered(request.POST['definition'])
+            game.user_answered()
+            num_of_ans = game.status
+            if num_of_ans == UserInZavalinkaGame.objects.filter(game=game).count():
+                game.next_phase()
+        if game_phase == 'choosing_definition':
+            UserInZavalinkaGame.objects.get(user=user.profile, game=game).user_chose(request.POST['definition'])
+            game.user_answered()
+            num_of_ans = game.status
+            if num_of_ans == UserInZavalinkaGame.objects.filter(game=game).count():
+                for user_in_game in users_in_game:
+                    if user_in_game.last_choice == str(game.last_ask.definition):
+                        user_in_game.change_score(3)
+                    else:
+                        UserInZavalinkaGame.objects.get(last_answer=user_in_game.last_choice, game=game).change_score(1)
+                game.next_phase()
+        if game_phase == 'round_results':
+            game.next_phase()
         return HttpResponseRedirect(reverse('game') + '?game_id=' + str(game.id))
         
 
@@ -90,21 +113,35 @@ class GameView(TemplateView):
         context = {
             'game': game,
             'users_in_game':users_in_game,
-            'users_answer':UserInZavalinkaGame.objects.get(user=user.profile, game=game).not_answered,
+            'user_answered':UserInZavalinkaGame.objects.get(user=user.profile, game=game).not_answered,
         }
         if game_phase == 'waiting_for_players':
             return render(request, 'zavalinka_game/game/waiting_for_players.html', context=context)
         if game_phase == 'writing_definitions':
             return render(request, 'zavalinka_game/game/writing_definitions.html', context=context)
         if game_phase == 'choosing_definition':
+            definitions = [game.last_ask.definition]
+            for user_in_game in users_in_game:
+                definitions.append(user_in_game.last_answer)
+            shuffle(definitions)
+            context['definitions'] = definitions
             return render(request, 'zavalinka_game/game/choosing_definition.html', context=context)
+        if game_phase == 'round_results':
+            return render(request, 'zavalinka_game/game/round_results.html', context=context)
         if game_phase == 'endscreen':
+            max_score = -1
+            winner = None
+            for user_in_game in users_in_game:
+                if max_score < user_in_game.score:
+                    max_score = user_in_game.score
+                    winner = str(user_in_game)
+            context['winner'] = winner
             return render(request, 'zavalinka_game/game/endscreen.html', context=context)
 
 
 class AllGamesView(TemplateView):
     def get(self, request):
-        games = ZavalinkaGame.objects.all()
+        games = ZavalinkaGame.objects.exclude(phase__exact='endscreen')
         context = {"games": [(game, {"users_str": ", ".join([str(user_in_game.user.user.username) for user_in_game in game.users.all()])}) for game in games]}
         return render(request, 'zavalinka_game/all_games.html', context=context)
 

@@ -3,7 +3,7 @@
 
 
 {% block header %}
-    <link href="{% static 'zavalinka_game/game/endscreen.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'zavalinka_game/game/round_results.css' %}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block content %}
@@ -24,8 +24,15 @@
         </tr>
     </table>    
     <div class="information">
-        <font size="6"> 
-            Поздравляем с победой, {{ winner }}!
-        </font>
+        <big>
+            Правильное определение:
+        </big>
+        <br>
+        {{ game.last_ask.word }} --- это {{ game.last_ask.definition }}
     </div>
+    <form method="POSt">
+        {% csrf_token %}
+        <input type="hidden" name="game_id" value="{{ game.id }}">
+        <button type="submit" class="next-round-btn">Следующий раунд</button>
+    </form>
 {% endblock %}

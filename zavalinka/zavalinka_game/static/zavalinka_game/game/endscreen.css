@@ -22,11 +22,9 @@
     text-align: center;
 }
 
-.start-btn {
-    background-color: gold;
-    border-color: deeppink;
+.information{
+    width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5px;
-    display:block;
+    margin-top: 5em;
 }

@@ -3,9 +3,55 @@
 
 
 {% block header %}
-    <link href="{% static 'zavalinka_game/game/game.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'zavalinka_game/game/choosing_definition.css' %}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block content %}
-    бебрик
+    <table class="users-list">
+        <tr>
+        {% for user_in_game in users_in_game %}
+            <td>
+                <div class="user">
+                    <img src="{% static 'images/' %}{{ user_in_game.user.profile_pic }}" class="profile-img">
+                    <div class="user-info">
+                        <font size="4.5"> <b>{{ user_in_game.user.user }}</b> </font>
+                        <br>
+                        <font size="4"> <b>{{ user_in_game.score }}</b> </font>
+                    </div>
+                </div>
+            </td>
+        {% endfor %}
+        </tr>
+    </table>   
+    {% if user_answered %} 
+        <div class="information">
+            <big> 
+                Выберите, какое определение является определением слова "{{ game.last_ask.word }}":
+            </big>
+        </div>
+        <table class="all-definitions">
+            <tr>
+            {% for definition in definitions %}
+                <td>
+                    <div class="cell">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="game_id" value="{{ game.id }}">
+                            <input type="hidden" name="definition" value="{{ definition }}">
+                            <button type="submit" class="word-definition">
+                                {{ definition }}
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            {% endfor %}
+            </tr>
+        </table>
+    {% else %}
+        <div class='information'>
+            <big> 
+                Вы выбрали определение, дождитесь ответов других игроков
+            </big>
+        </div>
+    {% endif %}
 {% endblock %}

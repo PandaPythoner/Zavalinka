@@ -22,7 +22,14 @@
     text-align: center;
 }
 
-.start-btn {
+.information{
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+}
+
+.next-round-btn {
     background-color: gold;
     border-color: deeppink;
     margin-left: auto;
