@@ -1,0 +1,26 @@
+.users-list {
+    margin-top: 2em;
+    margin: auto;
+    width: max-content;
+}
+
+.profile-img {
+    max-width: 10em;
+    height: auto;
+    width: auto;
+    border-radius: 5px;
+}
+
+
+.user {
+    padding: 1em;
+    background: rgb(40, 71, 105);
+    border: 1px solid;
+    border-color: black;
+    margin-left: 1em;
+    border-radius: 10px;
+}
+
+.user-info {
+    text-align: center;
+}

@@ -1,0 +1,22 @@
+{% load static %}
+
+
+<link href="{% static 'zavalinka_game/game/users_list_in_game.css' %}" rel="stylesheet" type="text/css">
+
+
+<table class="users-list">
+    <tr>
+        {% for user_in_game in users_in_game %}
+        <td>
+            <div class="user">
+                <img src="{% static 'images/' %}{{ user_in_game.user.profile_pic }}" class="profile-img">
+                <div class="user-info">
+                    <font size="4.5"> <b>{{ user_in_game.user.user }}</b> </font>
+                    <br>
+                    <font size="4"> <b>Счёт: {{ user_in_game.score }}</b> </font>
+                </div>
+            </div>
+        </td>
+        {% endfor %}
+    </tr>
+</table>    

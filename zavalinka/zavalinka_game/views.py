@@ -72,25 +72,26 @@ class GameView(TemplateView):
         user = request.user
         game = games[0]
         game_phase = game.phase
-        users_in_game = UserInZavalinkaGame.objects.filter(game=game)
+        users_in_game = game.users.all()
         if game_phase == 'waiting_for_players':
             game.next_phase()
         if game_phase == 'writing_definitions':
-            UserInZavalinkaGame.objects.get(user=user.profile, game=game).user_answered(request.POST['definition'])
+            users_in_game.get(user=user.profile, game=game).user_answered(request.POST['definition'])
             game.user_answered()
             num_of_ans = game.status
-            if num_of_ans == UserInZavalinkaGame.objects.filter(game=game).count():
+            if num_of_ans == users_in_game.count():
                 game.next_phase()
         if game_phase == 'choosing_definition':
-            UserInZavalinkaGame.objects.get(user=user.profile, game=game).user_chose(request.POST['definition'])
+            users_in_game.get(user=user.profile, game=game).user_chose(request.POST['definition'])
             game.user_answered()
             num_of_ans = game.status
-            if num_of_ans == UserInZavalinkaGame.objects.filter(game=game).count():
+            if num_of_ans == users_in_game.count():
                 for user_in_game in users_in_game:
                     if user_in_game.last_choice == str(game.last_ask.definition):
                         user_in_game.change_score(3)
                     else:
-                        UserInZavalinkaGame.objects.get(last_answer=user_in_game.last_choice, game=game).change_score(1)
+                        for user in users_in_game.filter(last_answer=user_in_game.last_choice):
+                            user.change_score(1)
                 game.next_phase()
         if game_phase == 'round_results':
             game.next_phase()
@@ -109,11 +110,11 @@ class GameView(TemplateView):
         user = request.user
         game = games[0]
         game_phase = str(game.phase)
-        users_in_game = UserInZavalinkaGame.objects.filter(game=game)
+        users_in_game = game.users.all()
         context = {
             'game': game,
             'users_in_game':users_in_game,
-            'user_answered':UserInZavalinkaGame.objects.get(user=user.profile, game=game).not_answered,
+            'user_answered':users_in_game.get(user=user.profile).not_answered,
         }
         if game_phase == 'waiting_for_players':
             return render(request, 'zavalinka_game/game/waiting_for_players.html', context=context)
