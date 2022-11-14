@@ -1,0 +1,22 @@
+.logo {
+    margin-top: 5em;
+    margin-left: 23em;
+    display: block;
+}
+
+.lobby-btn {
+    background-color: gold;
+    border-color: deeppink;
+    margin-left: 41em;
+    margin-top: 5px;
+    display:inline-block;
+    border-radius: 50px;
+    border-width: 5px;
+    height:5em;
+    
+    max-width: fit-content;
+}
+
+.btn-text{
+    color:indigo;
+}

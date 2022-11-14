@@ -1,6 +1,18 @@
 {% extends "base.html" %}
+{% load static %}
 
+{% block header %}
+    <link href="{% static 'zavalinka_game/home_page.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
 
 {% block content %}
-Sasha bebra
+    <div class="logo">
+        <img src="{% static 'images/logo.png' %}">
+    </div>
+    <a href="{% url 'all_games' %}">
+        <button type="button" class="lobby-btn">
+            <font size="5" class="btn-text">
+                <b>Войти в лобби</b>
+        </button>
+    </a>
 {% endblock %}
