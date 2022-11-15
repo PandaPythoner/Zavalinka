@@ -25,5 +25,21 @@
 
 .change-img-btn {
     margin-top: 2px;
-    background-color: lightgray;
+    background-color: gold;
+    border-color: deeppink;
+}
+
+.make-friend-btn {
+    margin-top: 2px;
+    background-color: gold;
+    border-color: deeppink;
+    border-radius: 20px;
+}
+
+.friends {
+    margin-top: 2px;
+    background-color: gold;
+    border: 2px solid deeppink;
+    border-radius: 20px;
+    width: fit-content;
 }

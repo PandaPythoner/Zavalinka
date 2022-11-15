@@ -9,7 +9,7 @@
         {% for user_in_game in users_in_game %}
         <td>
             <div class="user">
-                <img src="{% static 'images/' %}{{ user_in_game.user.profile_pic }}" class="profile-img">
+                <img src="{{ user_in_game.user.profile_pic.url }}" class="profile-img">
                 <div class="user-info">
                     <font size="4.5"> <b>{{ user_in_game.user.user }}</b> </font>
                     <br>

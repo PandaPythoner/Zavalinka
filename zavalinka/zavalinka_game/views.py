@@ -23,28 +23,28 @@ def friends_list(request):
 
 class ProfilePage(TemplateView):
     def get(self, request, user):
-        profile_img = User.objects.get(username=user).profile.profile_pic
-        users_profile = request.user.is_authenticated
-        if users_profile:
-            users_profile = users_profile & (user == request.user.username)
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('login'))
+        profile_img = User.objects.get(username=user).profile.profile_pic.url
+        users_profile = user == request.user.username
+        friends = (User.objects.get(username=user).profile in request.user.profile.friends.all())
         context = {
             "profile_img":profile_img,
             "users_profile":users_profile,
             "user":user,
+            "friends":friends,
         }
         return render(request, "zavalinka_game/profile.html", context=context)
+    
     def post(self, request, user):
-        
-        profile_img = User.objects.get(username=user).profile.profile_pic
-        users_profile = request.user.is_authenticated
-        if users_profile:
-            users_profile = users_profile & (user == request.user.username)
-        context = {
-            "profile_img":profile_img,
-            "users_profile":users_profile,
-            "user":user,
-        }
-        return render(request, "zavalinka_game/profile.html", context=context)
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('login'))
+        if "makefriend" in request.POST:
+            request.user.profile.make_friend(User.objects.get(username=user).profile)
+            return HttpResponseRedirect(reverse("profile", kwargs={'user':user}))
+        request.user.profile.upload_photo(request.FILES['profimg'])
+        #request.user.profile.profile_img = new_image.name
+        return HttpResponseRedirect(reverse("profile", kwargs={'user':user}))
 
 class CreateGameView(TemplateView):
     def get(self, request):

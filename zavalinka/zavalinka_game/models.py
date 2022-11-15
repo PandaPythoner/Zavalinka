@@ -8,6 +8,15 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     friends = models.ManyToManyField('Profile', blank=True)
     profile_pic = models.ImageField(null=True, blank=True, default='default_icon.png')
+
+    def make_friend(self, user):
+        self.friends.add(user)
+        self.save()
+
+    def upload_photo(self, new_image):
+        self.profile_pic = new_image
+        self.save()
+
     def __str__(self):
         return self.user.username
 
