@@ -14,7 +14,7 @@
             {% for friend in all_friends %}
                 <div class='friend-item'>
                     <div class='friend container'>
-                        {{ friend }}
+                        <a href='{% url 'profile' user=friend.user.username %}'> {{ friend }} </a>
                     </div>
                 </div>
             {% endfor %}

@@ -18,7 +18,9 @@
             {% csrf_token %}
             <input type="file" name="profimg" id="profimg" class="upload-btn">
             <br>
-            <button type="submit" class="change-img-btn">Изменить аватар</button>
+            <div class='change-img-btn-div'>
+              <button type="submit" class="change-img-btn">Изменить аватар</button>
+            </div> 
           </form>
         {% endif %}
       </div>

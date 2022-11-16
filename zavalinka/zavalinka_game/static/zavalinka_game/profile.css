@@ -4,9 +4,18 @@
     background: #f0f0f0;
     border: 2px solid #666;
     */
-    max-width: 15em;
+    max-width: 16em;
     height: auto;
     width: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+
+.upload-btn{
+    max-width: 16em;
+    border-radius: 5px;
+    text-align: center;
 }
 
 
@@ -27,6 +36,14 @@
     margin-top: 2px;
     background-color: gold;
     border-color: deeppink;
+    margin-top: 10px;
+    border-radius: 6px;
+}
+
+.change-img-btn-div{
+    margin-right: auto;
+    margin-left: auto;
+    width: fit-content;
 }
 
 .make-friend-btn {
@@ -34,6 +51,7 @@
     background-color: gold;
     border-color: deeppink;
     border-radius: 20px;
+    margin-top: 10px;
 }
 
 .friends {

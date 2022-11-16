@@ -56,7 +56,7 @@ body, html, main {
     background-color: #36383a;
 }
 
-button, big, input, th, table, div{
+button, big, input, th, table, div, a{
     color: white;
 }
 
