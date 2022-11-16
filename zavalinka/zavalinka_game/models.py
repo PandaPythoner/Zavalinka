@@ -7,7 +7,7 @@ from random import randint
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     friends = models.ManyToManyField('Profile', blank=True)
-    profile_pic = models.ImageField(null=True, blank=True, default='default_icon.png')
+    profile_pic = models.ImageField(upload_to='profile_images/', null=True, blank=True, default='profile_images/default_icon.png')
 
     def make_friend(self, user):
         self.friends.add(user)
