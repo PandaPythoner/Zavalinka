@@ -6,13 +6,25 @@
 {% endblock %}
 
 {% block content %}
-    <div class="logo">
-        <img src="{% static 'images/logo.png' %}">
-    </div>
-    <a href="{% url 'all_games' %}">
-        <button type="button" class="lobby-btn">
-            <font size="5" class="btn-text">
-                <b>Войти в лобби</b>
-        </button>
-    </a>
+    <table style="width: 100%">
+        <tr>
+            <th>
+                <div class="logo-div">
+                    <img src="{% static 'images/logo.png' %}" class='logo'>
+                <div>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <div class='lobby-btn-div'>
+                    <a href="{% url 'all_games' %}">
+                        <button type="button" class="lobby-btn">
+                            <font size="5" class="btn-text">
+                                <b>Войти в лобби</b>
+                        </button>
+                    </a>
+                </div>
+            </th>
+        </tr>
+    </table>
 {% endblock %}
