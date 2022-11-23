@@ -185,6 +185,7 @@ class AddWordsView(TemplateView):
             words_file = request.FILES["words"]
             if not words_file.name.endswith(".txt"):
                 context['default_shown_message'] = 'Файл должен иметь расширение .txt'
+                context['default_shown_message_color'] = 'red'
             else:
                 words_string = words_file.read().decode('utf-8')
                 ok = True
@@ -199,6 +200,7 @@ class AddWordsView(TemplateView):
                             context['default_shown_message'] = 'Неверный формат файла: есть непустая строка без символа ":"'
                         else:
                             context['default_shown_message'] = 'Неверный формат файла: есть строка с облее чем одним символом ":"'
+                        context['default_shown_message_color'] = 'red' 
                         break
                     words_to_add.append(word_and_definition)
                 if ok:
@@ -207,5 +209,6 @@ class AddWordsView(TemplateView):
                         word_object = ZavalinkaWord(word=word, definition=definition)
                         word_object.save()
                     context['default_shown_message'] = 'Слова успешно добавлены!'
+                    context['default_shown_message_color'] = 'green'
 
         return render(request, 'zavalinka_game/add_words/add_words.html', context=context)

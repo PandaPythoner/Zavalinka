@@ -16,11 +16,7 @@
 
     <link href="{% static 'base.css' %}" rel="stylesheet" type="text/css">
 
-    <script>
-      {% if default_shown_message %} 
-        alert("{{ default_shown_message }}");
-      {% endif %}
-    </script>
+    
 
 
     {% block header %}
@@ -92,10 +88,26 @@
           </li>
           {% endif %}
         </div>
-          {% block content %}
+        {% if default_shown_message %} 
+          <script>
+            // alert("{{ default_shown_message }}");
+          </script>
+          
+          <div class='default-shown-message-div'
+            {% if not default_shown_message_color %}
+              style='background-color:rgb(200, 200, 200);'
+            {% else %}
+              style='background-color:{{ default_shown_message_color }};'
+            {% endif %}
+            >
+            <div class='default-shown-message-div-inner'>
+              {{ default_shown_message }}
+            </div>
+          </div>
+        {% endif %}
+        {% block content %}
 
-          {% endblock %}
-        <div>
+        {% endblock %}
     </main>
   </body>
 </html>
