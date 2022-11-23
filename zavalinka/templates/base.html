@@ -35,6 +35,13 @@
             <button class="go-home-button super-button"> На главную </button> 
           </a>
           <ul class="nav">
+          {% if request.user.is_superuser %}
+            <li>
+              <a href="{% url 'add_words' %}"> 
+                <button class='btn add-words-href-button'> Добавить слова </button> 
+              </a>
+            </li>
+          {% endif %}
           <li>
             <a href="{% url 'all_games' %}"> 
               <button class='btn view-all-games-button'> Все игры </button> 
