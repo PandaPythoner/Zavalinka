@@ -1,0 +1,34 @@
+.add-words-info{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.words-file-input{
+    border-radius: 5px;
+}
+
+.add-words-form-div{
+    margin-top: 20px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.add-words-form-div form input {
+    border-radius: 6px;
+}
+
+
+.add-words-form-send-button{
+    background-color:cornflowerblue;
+    border-color:cornflowerblue;
+    color:black;
+    margin-left: 7px;
+    border-radius: 6px;
+}
+
+.add-words-form-errors{
+    color: red;
+}

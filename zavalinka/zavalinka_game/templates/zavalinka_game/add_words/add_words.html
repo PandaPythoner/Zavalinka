@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block header %}
+    <link href="{% static 'zavalinka_game/add_words/add_words.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <div class="add-words-info">
+        Здесь вы можете добавить слова, <br>
+        которые будут использованы для игры в завалинку! <br>
+        <br>
+        Вы должны отправить текстовый файл, <br>
+        который будет содержать слова и их определения. <br>
+        <br>
+        Формат файла: <br>
+            1. Каждая пара слово-определение в своей строчке <br>
+            2. Слово и определение записываются через символ ":" <br>
+            (Соответственно сам этот символ не может быть использован ни в слове, ни в определении) <br>
+        <br>
+            Пример: <br>
+            Пупсень: Крутышка, брат-близнец Вупсеня <br>
+            Вупсень: Крутышка, брат-близнец Пупсеня
+    </div>
+    <div class="add-words-form-div">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class='add-words-form-errors'>
+                {{ add_words_form.words.errors }}
+            </div>
+            {{ add_words_form.words }}
+            <button type="submit" class="add-words-form-send-button">
+                Добавить словечки!
+            </button>
+        </form>
+    </div>
+{% endblock %}

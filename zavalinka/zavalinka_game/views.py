@@ -3,9 +3,10 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView
-from .models import UserInZavalinkaGame, ZavalinkaGame, Profile
+from .models import UserInZavalinkaGame, ZavalinkaGame, Profile, ZavalinkaWord
 from django.contrib.auth.models import User
 from random import shuffle
+from .forms import AddWordsForm
 
 # Create your views here.
 
@@ -165,3 +166,46 @@ class JoinGameView(TemplateView):
         return HttpResponseRedirect(reverse('game') + '?game_id=' + str(game.id))
 
 
+class AddWordsView(TemplateView):
+    def get(self, request):
+        if (not request.user.is_authenticated) or (not request.user.is_superuser):
+            return render(request, 'zavalinka_game/add_words/not_a_super_user.html')
+        context = {
+            'add_words_form': AddWordsForm(),
+        }
+        return render(request, 'zavalinka_game/add_words/add_words.html', context=context)
+
+    def post(self, request):
+        if (not request.user.is_authenticated) or (not request.user.is_superuser):
+            return render(request, 'zavalinka_game/add_words/not_a_super_user.html')
+        context = {}
+        form = AddWordsForm(request.POST, request.FILES)
+        context['add_words_form'] = form
+        if form.is_valid():
+            words_file = request.FILES["words"]
+            if not words_file.name.endswith(".txt"):
+                context['default_shown_message'] = 'Файл должен иметь расширение .txt'
+            else:
+                words_string = words_file.read().decode('utf-8')
+                ok = True
+                words_to_add = []
+                for word_line in words_string.split('\n'):
+                    word_and_definition = word_line.strip().split(':')
+                    if len(word_and_definition) == 0 or (len(word_and_definition) == 1 and word_and_definition[0] == ''):
+                        continue
+                    if len(word_and_definition) != 2:
+                        ok = False
+                        if len(word_and_definition) == 1:
+                            context['default_shown_message'] = 'Неверный формат файла: есть непустая строка без символа ":"'
+                        else:
+                            context['default_shown_message'] = 'Неверный формат файла: есть строка с облее чем одним символом ":"'
+                        break
+                    words_to_add.append(word_and_definition)
+                if ok:
+                    for word, definition in words_to_add:
+                        ZavalinkaWord.objects.filter(word=word).delete()
+                        word_object = ZavalinkaWord(word=word, definition=definition)
+                        word_object.save()
+                    context['default_shown_message'] = 'Слова успешно добавлены!'
+
+        return render(request, 'zavalinka_game/add_words/add_words.html', context=context)

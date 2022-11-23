@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block header %}
+    <link href="{% static 'zavalinka_game/add_words/not_a_super_user.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <div class="not-a-super-user-message">
+        Слова могут добавлять только админы.  <br>
+        Что бы добавить слова, пожалуйста, зайдите под аккаунтом администратора.  
+    </div>
+{% endblock %}
