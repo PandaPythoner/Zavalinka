@@ -4,4 +4,7 @@ venv
 zavalinka/static-collected/
 zavalinka/zavalinka/hidden_settings.py
 zavalinka/db.sqlite3
-zavalinka/media/
+zavalinka/media/*
+!zavalinka/media/profile_images/
+zavalinka/media/profile_images/*
+!zavalinka/media/profile_images/default_icon.png
